@@ -45,6 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       items: _navbarItems,
       type: BottomNavigationBarType.fixed,
       selectedIconTheme: const IconThemeData(color: Colors.black),
+      unselectedIconTheme: const IconThemeData(color: Colors.black54),
     );
   }
 }
