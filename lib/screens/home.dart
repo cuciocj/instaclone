@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instaclone/widgets/bottom_nav_bar.dart';
+import 'package:instaclone/widgets/post.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,9 +38,28 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: const Center(
-        child: Text('hello friend'),
+        child: PostList(),
       ),
       bottomNavigationBar: const BottomNavBar(),
+    );
+  }
+}
+
+class PostList extends StatelessWidget {
+  const PostList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.zero,
+      child: ListView(
+        children: const [
+          Post(imageNumber: 238),
+          Post(imageNumber: 237),
+          Post(imageNumber: 239),
+          Post(imageNumber: 236),
+        ],
+      ),
     );
   }
 }
