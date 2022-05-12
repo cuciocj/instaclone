@@ -24,6 +24,13 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.comicNeueTextTheme(Theme.of(context).textTheme),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: Colors.white,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedIconTheme: IconThemeData(color: Colors.black),
+          unselectedIconTheme: IconThemeData(color: Colors.black54),
+          type: BottomNavigationBarType.fixed,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+        ),
       ),
     );
   }

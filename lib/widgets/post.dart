@@ -126,7 +126,7 @@ class Post extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: const [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 2),
+                    padding: EdgeInsets.only(bottom: 3),
                     child: Text(
                       'View all 3 comments',
                       style: TextStyle(
@@ -157,6 +157,7 @@ class Post extends StatelessWidget {
                 ],
               ),
               Row(
+                // elapsed time
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(

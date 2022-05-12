@@ -8,12 +8,12 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentIndex = 0;
+  int _currentPage = 0;
 
   final _navbarItems = const [
     BottomNavigationBarItem(
-        icon: Icon(Icons.home_outlined),
-        label: '',
+      icon: Icon(Icons.home_outlined),
+      label: '',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.search_outlined),
@@ -36,10 +36,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: (value) {
+      currentIndex: _currentPage,
+      onTap: (index) {
         setState(() {
-          _currentIndex = value;
+          _currentPage = index;
         });
       },
       items: _navbarItems,
