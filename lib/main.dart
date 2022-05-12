@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.comicNeueTextTheme(Theme.of(context).textTheme),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: Colors.white,
       ),
     );
   }
