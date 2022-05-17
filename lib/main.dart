@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.comicNeueTextTheme(Theme.of(context).textTheme),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: Colors.white,
+        splashColor: Colors.transparent,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           selectedIconTheme: IconThemeData(color: Colors.black),
           unselectedIconTheme: IconThemeData(color: Colors.black54),

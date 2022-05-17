@@ -1,16 +1,32 @@
-import 'package:flutter/material.dart';
+import 'dart:core';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:instaclone/screens/activity_page.dart';
+import 'package:instaclone/screens/profile_page.dart';
+import 'package:instaclone/screens/reels_page.dart';
+import 'package:instaclone/screens/search_page.dart';
+import 'package:instaclone/screens/feed_page.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentPage = 0;
+class _HomePageState extends State<HomePage> {
+  final String _appBarTitle = 'Instaclone';
+  int _selectedIndex = 0;
 
-  final _navbarItems = const [
+  final List<Widget> _pages = const [
+    FeedPage(),
+    SearchPage(),
+    ReelPage(),
+    ActivityPage(),
+    ProfilePage(),
+  ];
+
+  final List<BottomNavigationBarItem> _navbarItems = const [
     BottomNavigationBarItem(
       icon: Icon(Icons.home_outlined),
       label: '',
@@ -35,17 +51,49 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: _currentPage,
-      onTap: (index) {
-        setState(() {
-          _currentPage = index;
-        });
-      },
-      items: _navbarItems,
-      type: BottomNavigationBarType.fixed,
-      selectedIconTheme: const IconThemeData(color: Colors.black),
-      unselectedIconTheme: const IconThemeData(color: Colors.black54),
+    return Scaffold(
+      appBar: AppBar(
+        actionsIconTheme: const IconThemeData(
+          color: Colors.black,
+          size: 25,
+        ),
+        title: Text(
+          _appBarTitle,
+          style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+              fontSize: 25),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // TODO handle press
+            },
+            icon: const Icon(Icons.add_box_outlined),
+          ),
+          IconButton(
+            onPressed: () {
+              // TODO handle press
+            },
+            icon: const Icon(Icons.message_outlined),
+          )
+        ],
+        backgroundColor: Colors.white,
+      ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: _navbarItems,
+      ),
     );
   }
 }

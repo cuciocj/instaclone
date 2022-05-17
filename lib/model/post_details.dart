@@ -5,6 +5,8 @@ class PostDetail {
   late String caption;
   late String location;
   late DateTime uploadDate;
+  late bool isLiked;
+  late bool isSaved;
 
   PostDetail(
       this.likes,
@@ -12,5 +14,7 @@ class PostDetail {
       this.imageUrl,
       this.caption,
       this.location,
-      this.uploadDate);
+      this.uploadDate,
+      this.isLiked,
+      this.isSaved);
 }

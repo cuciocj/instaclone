@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:instaclone/model/post_details.dart';
 
-class Post extends StatelessWidget {
+class Post extends StatefulWidget {
   final PostDetail _postDetail;
+
+  final Function callback;
 
   const Post({
     Key? key,
     required PostDetail postDetail,
-  }) : _postDetail = postDetail,
+    required this.callback,
+  })  : _postDetail = postDetail,
         super(key: key);
+
+  @override
+  State<Post> createState() => _PostState();
+}
+
+class _PostState extends State<Post> {
+  bool _isLiked = false;
+  bool _isSaved = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +30,14 @@ class Post extends StatelessWidget {
           leading: const CircleAvatar(),
           visualDensity: VisualDensity.compact,
           title: Text(
-            _postDetail.username,
+            widget._postDetail.username,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               letterSpacing: 0.5,
             ),
           ),
           subtitle: Text(
-            _postDetail.location,
+            widget._postDetail.location,
             style: const TextStyle(letterSpacing: 0.5),
           ),
           trailing: IconButton(
@@ -36,7 +47,7 @@ class Post extends StatelessWidget {
           ),
         ),
         Image.network(
-          _postDetail.imageUrl,
+          widget._postDetail.imageUrl,
           fit: BoxFit.fitWidth,
         ),
         ListTile(
@@ -46,8 +57,19 @@ class Post extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.favorite_outline_outlined),
+                onPressed: () {
+                  setState(() {
+                    _isLiked = !_isLiked;
+                  });
+                },
+                icon: _isLiked
+                    ? const Icon(
+                        Icons.favorite_outlined,
+                        color: Colors.red,
+                      )
+                    : const Icon(
+                        Icons.favorite_outline_outlined,
+                      ),
                 iconSize: 30,
               ),
               IconButton(
@@ -63,8 +85,21 @@ class Post extends StatelessWidget {
             ],
           ),
           trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.bookmark_outline_outlined),
+            // bookmark
+            onPressed: () {
+              setState(() {
+                _isSaved = !_isSaved;
+              });
+              widget.callback(widget._postDetail);
+            },
+            icon: _isSaved
+                ? const Icon(
+                    Icons.bookmark_outlined,
+                    color: Colors.black,
+                  )
+                : const Icon(
+                    Icons.bookmark_outline_outlined,
+                  ),
             iconSize: 30,
           ),
         ),
@@ -79,7 +114,7 @@ class Post extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 2),
                     child: Text(
-                      "${_postDetail.likes} likes",
+                      "${widget._postDetail.likes} likes",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.5,
@@ -106,13 +141,13 @@ class Post extends StatelessWidget {
                           ),
                           children: [
                             TextSpan(
-                              text: '${_postDetail.username} ',
+                              text: '${widget._postDetail.username} ',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             TextSpan(
-                              text: _postDetail.caption,
+                              text: widget._postDetail.caption,
                             )
                           ],
                         ),
@@ -132,6 +167,7 @@ class Post extends StatelessWidget {
                       style: TextStyle(
                         letterSpacing: 0.5,
                         color: Colors.black54,
+                        fontSize: 16,
                       ),
                     ),
                   ),
@@ -163,7 +199,7 @@ class Post extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 2),
                     child: Text(
-                      getFormattedDateFormat(_postDetail.uploadDate),
+                      getFormattedDateFormat(widget._postDetail.uploadDate),
                       style: const TextStyle(
                         letterSpacing: 0.5,
                         color: Colors.black54,
