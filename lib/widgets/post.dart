@@ -163,7 +163,7 @@ class _PostState extends State<Post> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 3),
                     child: Text(
-                      'View all 3 comments',
+                      'View all comments',
                       style: TextStyle(
                         letterSpacing: 0.5,
                         color: Colors.black54,
