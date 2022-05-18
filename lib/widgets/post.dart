@@ -46,8 +46,22 @@ class _PostState extends State<Post> {
             iconSize: 30,
           ),
         ),
-        Image.network(
-          widget._postDetail.imageUrl,
+        FadeInImage.assetNetwork(
+          placeholder: 'assets/images/image_placeholder.png',
+          image: widget._postDetail.imageUrl,
+          imageErrorBuilder: (buildContext, exception, stacktrace) {
+            return Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                Image.asset(
+                  'assets/images/image_placeholder.png',
+                ),
+                const Center(
+                  child: Text('Couldn\'t load image. Tap to retry.'),
+                )
+              ],
+            );
+          },
           fit: BoxFit.fitWidth,
         ),
         ListTile(

@@ -111,29 +111,56 @@ class _FeedPageState extends State<FeedPage> {
 
     return Container(
       padding: EdgeInsets.zero,
-      child: ListView(
-        children: [
-          Post(
-            postDetail: postDetail1,
-            callback: callback,
-          ),
-          Post(
-            postDetail: postDetail2,
-            callback: callback,
-          ),
-          Post(
-            postDetail: postDetail3,
-            callback: callback,
-          ),
-          Post(
-            postDetail: postDetail4,
-            callback: callback,
-          ),
-          Post(
-            postDetail: postDetail5,
-            callback: callback,
-          ),
-        ],
+      child: RefreshIndicator(
+        onRefresh: () async {
+          setState(() {
+            // pull new uploads
+          });
+        },
+        child: ListView(
+          children: [
+            Post(
+              postDetail: postDetail1,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail2,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail3,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail4,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail5,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail1,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail2,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail3,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail4,
+              callback: callback,
+            ),
+            Post(
+              postDetail: postDetail5,
+              callback: callback,
+            ),
+          ],
+        ),
       ),
     );
   }
