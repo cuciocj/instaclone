@@ -139,26 +139,6 @@ class _FeedPageState extends State<FeedPage> {
               postDetail: postDetail5,
               callback: callback,
             ),
-            Post(
-              postDetail: postDetail1,
-              callback: callback,
-            ),
-            Post(
-              postDetail: postDetail2,
-              callback: callback,
-            ),
-            Post(
-              postDetail: postDetail3,
-              callback: callback,
-            ),
-            Post(
-              postDetail: postDetail4,
-              callback: callback,
-            ),
-            Post(
-              postDetail: postDetail5,
-              callback: callback,
-            ),
           ],
         ),
       ),
