@@ -4,13 +4,14 @@ import 'package:instaclone/model/post_details.dart';
 class Post extends StatefulWidget {
   final PostDetail _postDetail;
 
-  final Function callback;
+  final Function _callback;
 
   const Post({
     Key? key,
     required PostDetail postDetail,
-    required this.callback,
+    required Function callback,
   })  : _postDetail = postDetail,
+        _callback = callback,
         super(key: key);
 
   @override
@@ -20,6 +21,12 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   bool _isLiked = false;
   bool _isSaved = false;
+
+  void _toggleLiked() {
+    setState(() {
+      _isLiked = !_isLiked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,23 +53,26 @@ class _PostState extends State<Post> {
             iconSize: 30,
           ),
         ),
-        FadeInImage.assetNetwork(
-          placeholder: 'assets/images/image_placeholder.png',
-          image: widget._postDetail.imageUrl,
-          imageErrorBuilder: (buildContext, exception, stacktrace) {
-            return Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Image.asset(
-                  'assets/images/image_placeholder.png',
-                ),
-                const Center(
-                  child: Text('Couldn\'t load image. Tap to retry.'),
-                )
-              ],
-            );
-          },
-          fit: BoxFit.fitWidth,
+        GestureDetector(
+          onDoubleTap: _toggleLiked,
+          child: FadeInImage.assetNetwork(
+            placeholder: 'assets/images/image_placeholder.png',
+            image: widget._postDetail.imageUrl,
+            imageErrorBuilder: (buildContext, exception, stacktrace) {
+              return Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Image.asset(
+                    'assets/images/image_placeholder.png',
+                  ),
+                  const Center(
+                    child: Text('Couldn\'t load image. Tap to retry.'),
+                  )
+                ],
+              );
+            },
+            fit: BoxFit.fitWidth,
+          ),
         ),
         ListTile(
           visualDensity: VisualDensity.standard,
@@ -71,11 +81,7 @@ class _PostState extends State<Post> {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {
-                  setState(() {
-                    _isLiked = !_isLiked;
-                  });
-                },
+                onPressed: _toggleLiked,
                 icon: _isLiked
                     ? const Icon(
                         Icons.favorite_outlined,
@@ -104,7 +110,7 @@ class _PostState extends State<Post> {
               setState(() {
                 _isSaved = !_isSaved;
               });
-              widget.callback(widget._postDetail);
+              widget._callback(widget._postDetail);
             },
             icon: _isSaved
                 ? const Icon(
