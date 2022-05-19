@@ -24,13 +24,6 @@ class _FeedPageState extends State<FeedPage> {
       "elementum at, ullamcorper in tortor. Ut fermentum blandit commodo.";
 
   void callback(PostDetail postDetail) {
-    // setState(() {
-    //   if (_saved.contains(postDetail)) {
-    //     _saved.remove(postDetail);
-    //   } else {
-    //     _saved.add(postDetail);
-    //   }
-    // });
     if (_saved.contains(postDetail)) {
       _saved.remove(postDetail);
     } else {
@@ -94,8 +87,3 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 }
-//
-// Post(
-//   postDetail: postDetail1,
-//   callback: callback,
-// ),
